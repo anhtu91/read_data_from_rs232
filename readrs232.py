@@ -13,7 +13,7 @@ class index:
         try:
             #Define port serial
             port =serial.Serial(
-            '/dev/ttyUSB0', #python -m serial.tools.list_ports
+            '/dev/ttyUSB0', #Get current using usb port: python -m serial.tools.list_ports
             baudrate=9600,
             parity=serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_ONE,
@@ -26,8 +26,8 @@ class index:
                 str_decode = b.decode()  # decode byte string into Unicode
                 str_result = str_decode.strip("\n").strip("\r").replace("11", "").strip()
                 flt_result = float(str_result)/100
-                print("Result: "+str(flt_result))
-                return str(flt_result)
+                print("Result: "+str(flt_result).replace('.', ','))
+                return str(flt_result).replace('.',',')
             else:
                 return "Port is not opened"
         except (IOError, OSError) as e:
